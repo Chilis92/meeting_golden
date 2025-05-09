@@ -3,6 +3,7 @@ package com.abrhernandez.meeting_golden.service;
 import com.abrhernandez.meeting_golden.entity.Dog;
 import com.abrhernandez.meeting_golden.entity.DogInput;
 import com.abrhernandez.meeting_golden.entity.Person;
+import com.abrhernandez.meeting_golden.exception.CustomGraphQLException;
 import com.abrhernandez.meeting_golden.repository.DogRepository;
 import com.abrhernandez.meeting_golden.repository.PersonRepository;
 import lombok.AllArgsConstructor;
@@ -35,6 +36,9 @@ public class DogService {
 
         Optional<Person> personByEmail = personRepository.findPersonByEmail(dogInput.owner().email());
 
+        if (personByEmail.isEmpty()){
+            throw new CustomGraphQLException(400, "Owner with email: " +dogInput.owner().email()+" does not exist" );
+        }
         dog.setOwner(personByEmail.get());
         return dogRepository.save(dog);
     }

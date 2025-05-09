@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -35,7 +36,6 @@ public class Dog implements Serializable {
     private int age;
     private String gender;
     private byte[] image;
-
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private Person owner;

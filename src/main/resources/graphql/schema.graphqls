@@ -38,7 +38,7 @@ input PersonInput{
 
 type Query{
     findAllDogs: [Dog]!
-    findDogByID(id: ID): Dog
+    findDogByID(id: ID): Dog!
 }
 
 type Mutation{

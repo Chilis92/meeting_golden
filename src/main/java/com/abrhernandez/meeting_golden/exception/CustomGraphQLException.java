@@ -1,6 +1,8 @@
 package com.abrhernandez.meeting_golden.exception;
 
-public class CustomGraphQLException extends RuntimeException{
+import org.springframework.dao.DataIntegrityViolationException;
+
+public class CustomGraphQLException extends RuntimeException {
 
     private final int statusCode;
 

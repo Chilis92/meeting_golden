@@ -30,10 +30,14 @@ public class Dog implements Serializable {
             strategy = GenerationType.IDENTITY
     )
     private int id;
+    @Column(nullable = false)
     private String name;
     private String bread;
+    @Column(nullable = false)
     private String color;
+    @Column(nullable = false)
     private int age;
+    @Column(nullable = false)
     private String gender;
     private byte[] image;
     @ManyToOne

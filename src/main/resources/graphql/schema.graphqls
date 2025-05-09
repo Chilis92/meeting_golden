@@ -23,7 +23,7 @@ type Person{
     age: Int
     gender: String
     email: String
-    address: String
+    city: String
     phone: String
 }
 
@@ -32,7 +32,7 @@ input PersonInput{
     age: Int
     gender: String
     email: String
-    address: String
+    city: String
     phone: String
 }
 
@@ -44,4 +44,6 @@ type Query{
 type Mutation{
     createDog(dogInput: DogInput): Dog
     updateDog(id: ID, dogInput: DogInput): Dog
+    createPerson(personInput: PersonInput): Person
+    updatePerson(id: ID, personInput: PersonInput): Person
 }

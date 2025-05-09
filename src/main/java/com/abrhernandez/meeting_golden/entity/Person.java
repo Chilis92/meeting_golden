@@ -1,14 +1,13 @@
 package com.abrhernandez.meeting_golden.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -23,10 +22,14 @@ public class Person implements Serializable {
             strategy = GenerationType.IDENTITY
     )
     private int id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private int age;
+    @Column(nullable = false)
     private String gender;
+    @Column(nullable = false)
     private String email;
-    private String address;
+    private String city;
     private String phone;
 }

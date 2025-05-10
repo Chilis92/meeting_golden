@@ -20,8 +20,8 @@ jobs:
       - name: Setup mysql
         run: |
           sudo systemctl start mysql
-          mysql -e 'CREATE DATABASE golden_db;' -uroot -proot
-          mysql -e 'SHOW DATABASES;' -uroot -proot
+          mysql -e 'CREATE DATABASE golden_db;' -uroot -pgolden
+          mysql -e 'SHOW DATABASES;' -uroot -pgolden
 
       - name: Checkout repo
         uses: actions/checkout@v4

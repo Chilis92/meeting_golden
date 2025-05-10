@@ -20,6 +20,7 @@ jobs:
       mysql:
         image: mysql:latest
         env:
+          MYSQL_HOST: 127.0.0.1
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: golden_db
         ports:

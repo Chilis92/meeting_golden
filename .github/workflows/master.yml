@@ -6,9 +6,23 @@ on:
 
 jobs:
   build:
+    env:
+      DB_CONNECTION: mysql
+      DB_HOST: localhost
+      DB_PORT: 3306
+      DB_DATABASE: golden_db
+      DB_USERNAME: root
+      DB_PASSWORD: golden
+
     name: Maven build
     runs-on: ubuntu-latest
     steps:
+      - name: Setup mysql
+        run: |
+          sudo systemctl start mysql
+          mysql -e 'CREATE DATABASE golden_db;' -uroot -proot
+          mysql -e 'SHOW DATABASES;' -uroot -proot
+
       - name: Checkout repo
         uses: actions/checkout@v4
 

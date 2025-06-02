@@ -4,13 +4,17 @@ import com.abrhernandez.meeting_golden.entity.Dog;
 import com.abrhernandez.meeting_golden.entity.DogInput;
 import com.abrhernandez.meeting_golden.service.DogService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Controller
 @AllArgsConstructor
 public class DogController {
@@ -23,8 +27,9 @@ public class DogController {
     }
 
     @MutationMapping
-    public Dog createDog(@Argument DogInput dogInput) {
-        return dogService.createDog(dogInput);
+    public Dog createDog(@Argument DogInput dogInput, @Argument MultipartFile file) throws IOException {
+        log.info("Creating a dog "+dogInput.name());
+        return dogService.createDog(dogInput, file);
     }
 
 }

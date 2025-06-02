@@ -1,10 +1,11 @@
 type Dog{
-    id: ID
+    dogId: ID
     name: String
     bread: String
     color: String
     age: Int
     gender: String
+    imageURL: String
     owner: Person
 }
 
@@ -18,7 +19,7 @@ input DogInput{
 }
 
 type Person{
-    id: ID
+    personId: ID
     name: String
     age: Int
     gender: String
@@ -42,7 +43,7 @@ type Query{
 }
 
 type Mutation{
-    createDog(dogInput: DogInput): Dog
+    createDog(dogInput: DogInput, file: Upload): Dog
     updateDog(id: ID, dogInput: DogInput): Dog
     createPerson(personInput: PersonInput): Person
     updatePerson(id: ID, personInput: PersonInput): Person

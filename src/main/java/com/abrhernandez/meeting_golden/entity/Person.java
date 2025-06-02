@@ -5,23 +5,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Person implements Serializable {
 
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private int id;
+    private int personId;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -32,4 +31,6 @@ public class Person implements Serializable {
     private String email;
     private String city;
     private String phone;
+    @OneToMany(mappedBy = "owner")
+    private Set<Dog> dogs;
 }

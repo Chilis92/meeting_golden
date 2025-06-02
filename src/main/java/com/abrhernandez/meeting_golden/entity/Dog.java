@@ -21,15 +21,13 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Dog")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Dog implements Serializable {
 
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private int id;
+    private int dogId;
     @Column(nullable = false)
     private String name;
     private String bread;
@@ -39,8 +37,8 @@ public class Dog implements Serializable {
     private int age;
     @Column(nullable = false)
     private String gender;
-    private byte[] image;
+    private String imageURL;
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name = "person_id")
     private Person owner;
 }

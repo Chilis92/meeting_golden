@@ -28,7 +28,6 @@ public class DogController {
 
     @MutationMapping
     public Dog createDog(@Argument DogInput dogInput, @Argument MultipartFile file) throws IOException {
-        log.info("Creating a dog "+dogInput.name());
         return dogService.createDog(dogInput, file);
     }
 

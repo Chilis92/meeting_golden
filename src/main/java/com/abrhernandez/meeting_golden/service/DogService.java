@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -31,6 +30,8 @@ public class DogService {
     private final DogRepository dogRepository;
     private final PersonRepository personRepository;
 
+    private final KafkaMessagePublisher kafkaMessagePublisher;
+
     public List<Dog> findAll(){
        return Streamable.of(dogRepository.findAll()).toList();
 
@@ -39,6 +40,7 @@ public class DogService {
     public Dog createDog(DogInput dogInput, MultipartFile file){
 
         String imageURL = uploadFile(file);
+        //String imageURL = "";
 
         Dog dog = new Dog();
         dog.setAge(dogInput.age());
@@ -51,39 +53,38 @@ public class DogService {
             dog.setImageURL(imageURL);
         }
 
-        Optional<Person> personByEmail = personRepository.findPersonByEmail(dogInput.owner().email());
+        PersonInput personInput =  dogInput.owner();
+        Person person = new Person();
+        person.setName(personInput.name());
+        person.setAge(personInput.age());
+        person.setGender(personInput.gender());
+        person.setEmail(personInput.email());
+        person.setPhone(personInput.phone());
+        person.setCity(personInput.city());
+        Person personSaved = personRepository.save(person);
+        dog.setOwner(personSaved);
 
-        if (personByEmail.isEmpty()){
-            log.info("Person not found : "+dogInput.owner().email()+ " Creating one..");
-           PersonInput personInput =  dogInput.owner();
-           Person person = new Person();
-           person.setName(personInput.name());
-           person.setAge(personInput.age());
-           person.setGender(personInput.gender());
-           person.setEmail(personInput.email());
-           person.setPhone(personInput.phone());
-           person.setCity(personInput.city());
-           Person personSaved =  personRepository.save(person);
-           dog.setOwner(personSaved);
-
-        }else{
-            dog.setOwner(personByEmail.get());
+        Dog dogSaved = dogRepository.save(dog);
+        log.info("Dog stored in DB "+dogInput.name());
+        if(dogSaved != null){
+            kafkaMessagePublisher.sendPersonMessage(person);
         }
 
-        return dogRepository.save(dog);
+        return dogSaved;
     }
 
     // Upload file to S3 bucket
     private String uploadFile(MultipartFile file) {
         try {
-
             String s3FileName = file.getOriginalFilename();
             String region = amazonS3.getRegionName();
             InputStream inputStream = file.getInputStream();
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentType("image/jpeg");
+            objectMetadata.setContentLength(file.getSize());
 
             amazonS3.putObject(new PutObjectRequest(bucketName, s3FileName, inputStream, objectMetadata));
+            log.info("Image successfully saved to S3, size: "+file.getSize());
             return "https://"+bucketName+".s3."+region+".amazonaws.com/"+s3FileName;
         } catch (Exception e) {
             log.error("Error uploading file : "+e.getMessage());

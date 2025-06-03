@@ -26,10 +26,9 @@ public class KafkaMessagePublisher {
         CompletableFuture<SendResult<String, Object>> quickstart = template.send("dogtopic", person);
         quickstart.whenComplete((result,ex)->{
             if(ex == null){
-                log.info("Sent message : "+person.toString()+" with offset: "+result.getRecordMetadata().offset());
+                log.info("Sent message : {} with offset: {}", person.toString(), result.getRecordMetadata().offset());
             }else{
-                log.error("Unable to send message "+ex.getMessage());
-                System.out.println("Unable to send message "+ex.getMessage());
+                log.error("Unable to send message {}", ex.getMessage());
             }
         });
 

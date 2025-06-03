@@ -2,6 +2,7 @@ package com.abrhernandez.meeting_golden.controller;
 
 import com.abrhernandez.meeting_golden.entity.Dog;
 import com.abrhernandez.meeting_golden.entity.DogInput;
+import com.abrhernandez.meeting_golden.entity.PersonInput;
 import com.abrhernandez.meeting_golden.service.DogService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,8 @@ public class DogController {
     }
 
     @MutationMapping
-    public Dog createDog(@Argument DogInput dogInput, @Argument MultipartFile file) throws IOException {
-        return dogService.createDog(dogInput, file);
+    public List<Dog> createDog(@Argument List<DogInput> dogInput,@Argument PersonInput personInput) throws IOException {
+        return dogService.createDog(dogInput, personInput);
     }
 
 }

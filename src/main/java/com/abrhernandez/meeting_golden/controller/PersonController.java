@@ -17,8 +17,8 @@ public class PersonController {
     private final PersonService personService;
 
     @MutationMapping
-    public Person createPerson(@Argument PersonInput personInput){
-        return personService.createPerson(personInput);
+    public Person createPerson(@Argument List<PersonInput> personInput){
+        return personService.createPerson(personInput.get(0));
     }
 
 }

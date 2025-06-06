@@ -41,4 +41,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: abrhernandez/meeting_golden:${{ github.sha }} # Replace with your image name and tag
+          tags: abrhernandez/meeting_golden:latest # Replace with your image name and tag

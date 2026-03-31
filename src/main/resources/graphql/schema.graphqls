@@ -1,7 +1,7 @@
 type Dog{
     dogId: ID
     name: String
-    bread: String
+    breed: String
     color: String
     age: Int
     gender: String
@@ -11,7 +11,7 @@ type Dog{
 
 input DogInput{
     name: String
-    bread: String
+    breed: String
     color: String
     age: Int
     gender: String
@@ -45,6 +45,7 @@ type Query{
 type Mutation{
     createDog(dogInput: [DogInput], personInput: PersonInput): [Dog]
     updateDog(id: ID, dogInput: DogInput): Dog
+    deleteDog(id: ID): Boolean
     createPerson(personInput: PersonInput): Person
     updatePerson(id: ID, personInput: PersonInput): Person
 }

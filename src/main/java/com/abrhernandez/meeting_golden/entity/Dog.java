@@ -30,7 +30,7 @@ public class Dog implements Serializable {
     private int dogId;
     @Column(nullable = false)
     private String name;
-    private String bread;
+    private String breed;
     @Column(nullable = false)
     private String color;
     @Column(nullable = false)

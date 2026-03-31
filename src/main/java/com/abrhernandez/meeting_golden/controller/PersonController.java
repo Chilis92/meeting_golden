@@ -8,8 +8,6 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
-
 @Controller
 @AllArgsConstructor
 public class PersonController {
@@ -17,8 +15,12 @@ public class PersonController {
     private final PersonService personService;
 
     @MutationMapping
-    public Person createPerson(@Argument List<PersonInput> personInput){
-        return personService.createPerson(personInput.get(0));
+    public Person createPerson(@Argument PersonInput personInput) {
+        return personService.createPerson(personInput);
     }
 
+    @MutationMapping
+    public Person updatePerson(@Argument Integer id, @Argument PersonInput personInput) {
+        return personService.updatePerson(id, personInput);
+    }
 }

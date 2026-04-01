@@ -3,7 +3,7 @@ package com.abrhernandez.meeting_golden.mappers;
 import com.abrhernandez.meeting_golden.entity.Dog;
 import com.abrhernandez.meeting_golden.entity.DogInput;
 import com.abrhernandez.meeting_golden.entity.Person;
-import com.abrhernandez.meeting_golden.service.AmazonS3Service;
+import com.abrhernandez.meeting_golden.service.GcsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DogMapper {
 
-    private final AmazonS3Service amazonS3Service;
+    private final GcsService gcsService;
 
     public  List<Dog> mapDogListFromDogInput(List<DogInput> dogInput, Person person){
         List<Dog> result = new ArrayList<>();
@@ -22,7 +22,7 @@ public class DogMapper {
             Dog dog = new Dog();
 
             if(doggie.file() != null){
-                String imageURL = amazonS3Service.uploadFile(doggie.file());
+                String imageURL = gcsService.uploadFile(doggie.file());
                 dog.setImageURL(imageURL);
             }
 

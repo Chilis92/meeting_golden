@@ -24,7 +24,7 @@ public class DogService {
     private final PersonRepository personRepository;
     private final KafkaMessagePublisher kafkaMessagePublisher;
     private final DogMapper dogMapper;
-    private final AmazonS3Service amazonS3Service;
+    private final GcsService gcsService;
 
     public List<Dog> findAll() {
         return dogRepository.findAll();
@@ -60,7 +60,7 @@ public class DogService {
         dog.setGender(dogInput.gender());
 
         if (dogInput.file() != null) {
-            String imageURL = amazonS3Service.uploadFile(dogInput.file());
+            String imageURL = gcsService.uploadFile(dogInput.file());
             dog.setImageURL(imageURL);
         }
 

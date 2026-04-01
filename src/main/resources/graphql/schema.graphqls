@@ -1,7 +1,6 @@
 type Dog{
     dogId: ID
     name: String
-    breed: String
     age: Int
     gender: String
     imageURL: String
@@ -10,7 +9,6 @@ type Dog{
 
 input DogInput{
     name: String
-    breed: String
     age: Int
     gender: String
     file: Upload

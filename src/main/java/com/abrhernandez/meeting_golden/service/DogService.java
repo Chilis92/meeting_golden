@@ -56,7 +56,6 @@ public class DogService {
                 .orElseThrow(() -> new CustomGraphQLException(404, "Dog not found with id: " + id));
 
         dog.setName(dogInput.name());
-        dog.setBreed(dogInput.breed());
         dog.setAge(dogInput.age());
         dog.setGender(dogInput.gender());
 

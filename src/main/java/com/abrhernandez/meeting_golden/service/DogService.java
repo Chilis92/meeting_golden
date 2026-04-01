@@ -36,15 +36,17 @@ public class DogService {
     }
 
     public List<Dog> createDog(List<DogInput> dogInput, PersonInput personInput) {
-        Person person = PersonMapper.mapPersonFromPersonInput(personInput);
-        Person personSaved = personRepository.save(person);
-        log.info("Person saved, ID : " + personSaved.getPersonId());
+        Person personSaved = null;
+        if (personInput != null) {
+            Person person = PersonMapper.mapPersonFromPersonInput(personInput);
+            personSaved = personRepository.save(person);
+            log.info("Person saved, ID : " + personSaved.getPersonId());
+            kafkaMessagePublisher.sendPersonMessage(personSaved);
+        }
 
         List<Dog> dogsToBeSaved = dogMapper.mapDogListFromDogInput(dogInput, personSaved);
         dogRepository.saveAll(dogsToBeSaved);
         log.info("All dogs saved, size : " + dogsToBeSaved.size());
-
-        kafkaMessagePublisher.sendPersonMessage(personSaved);
 
         return dogsToBeSaved;
     }

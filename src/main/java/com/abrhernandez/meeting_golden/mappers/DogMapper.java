@@ -27,7 +27,6 @@ public class DogMapper {
             }
 
             dog.setAge(doggie.age());
-            dog.setColor(doggie.color());
             dog.setBreed(doggie.breed());
             dog.setGender(doggie.gender());
             dog.setName(doggie.name());

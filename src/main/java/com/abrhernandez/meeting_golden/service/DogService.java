@@ -57,7 +57,6 @@ public class DogService {
 
         dog.setName(dogInput.name());
         dog.setBreed(dogInput.breed());
-        dog.setColor(dogInput.color());
         dog.setAge(dogInput.age());
         dog.setGender(dogInput.gender());
 

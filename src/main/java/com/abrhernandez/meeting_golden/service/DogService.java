@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -22,7 +23,7 @@ public class DogService {
 
     private final DogRepository dogRepository;
     private final PersonRepository personRepository;
-    private final KafkaMessagePublisher kafkaMessagePublisher;
+    private final Optional<KafkaMessagePublisher> kafkaMessagePublisher;
     private final DogMapper dogMapper;
     private final GcsService gcsService;
 
@@ -41,7 +42,7 @@ public class DogService {
             Person person = PersonMapper.mapPersonFromPersonInput(personInput);
             personSaved = personRepository.save(person);
             log.info("Person saved, ID : " + personSaved.getPersonId());
-            kafkaMessagePublisher.sendPersonMessage(personSaved);
+            kafkaMessagePublisher.ifPresent(k -> k.sendPersonMessage(personSaved));
         }
 
         List<Dog> dogsToBeSaved = dogMapper.mapDogListFromDogInput(dogInput, personSaved);

@@ -37,12 +37,12 @@ public class DogController {
     }
 
     @MutationMapping
-    public Dog updateDog(@Argument Integer id, @Argument DogInput dogInput) {
-        return dogService.updateDog(id, dogInput);
+    public Dog updateDog(@Argument Integer id, @Argument DogInput dogInput, @Argument String token) {
+        return dogService.updateDog(id, dogInput, token);
     }
 
     @MutationMapping
-    public Boolean deleteDog(@Argument Integer id) {
-        return dogService.deleteDog(id);
+    public Boolean deleteDog(@Argument Integer id, @Argument String token) {
+        return dogService.deleteDog(id, token);
     }
 }

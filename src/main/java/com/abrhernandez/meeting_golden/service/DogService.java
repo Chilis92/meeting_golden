@@ -53,9 +53,13 @@ public class DogService {
         return dogsToBeSaved;
     }
 
-    public Dog updateDog(Integer id, DogInput dogInput) {
+    public Dog updateDog(Integer id, DogInput dogInput, String token) {
         Dog dog = dogRepository.findById(id)
                 .orElseThrow(() -> new CustomGraphQLException(404, "Dog not found with id: " + id));
+
+        if (!dog.getToken().equals(token)) {
+            throw new CustomGraphQLException(403, "No tienes permiso para editar este perro");
+        }
 
         dog.setName(dogInput.name());
         dog.setAge(dogInput.age());
@@ -71,9 +75,14 @@ public class DogService {
         return dogRepository.save(dog);
     }
 
-    public boolean deleteDog(Integer id) {
+    public boolean deleteDog(Integer id, String token) {
         Dog dog = dogRepository.findById(id)
                 .orElseThrow(() -> new CustomGraphQLException(404, "Dog not found with id: " + id));
+
+        if (!dog.getToken().equals(token)) {
+            throw new CustomGraphQLException(403, "No tienes permiso para eliminar este perro");
+        }
+
         gcsService.deleteFile(dog.getImageURL());
         dogRepository.delete(dog);
         return true;

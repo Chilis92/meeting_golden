@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @AllArgsConstructor
@@ -32,6 +33,7 @@ public class DogMapper {
             dog.setInstagram(doggie.instagram());
             dog.setCity(doggie.city());
             dog.setOwner(person);
+            dog.setToken(UUID.randomUUID().toString());
             result.add(dog);
 
         }

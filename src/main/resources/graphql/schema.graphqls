@@ -6,6 +6,7 @@ type Dog{
     imageURL: String
     instagram: String
     city: String
+    token: String
     owner: Person
 }
 
@@ -40,8 +41,8 @@ type Query{
 
 type Mutation{
     createDog(dogInput: [DogInput], personInput: PersonInput): [Dog]
-    updateDog(id: ID, dogInput: DogInput): Dog
-    deleteDog(id: ID): Boolean
+    updateDog(id: ID, dogInput: DogInput, token: String): Dog
+    deleteDog(id: ID, token: String): Boolean
     createPerson(personInput: PersonInput): Person
     updatePerson(id: ID, personInput: PersonInput): Person
 }

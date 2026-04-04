@@ -22,7 +22,6 @@ type Person{
     personId: ID
     name: String
     age: Int
-    gender: String
     email: String
     phone: String
 }
@@ -30,7 +29,6 @@ type Person{
 input PersonInput{
     name: String
     age: Int
-    gender: String
     email: String
     phone: String
 }

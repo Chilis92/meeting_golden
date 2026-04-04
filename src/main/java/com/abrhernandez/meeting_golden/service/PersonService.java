@@ -16,7 +16,6 @@ public class PersonService {
         Person person = new Person();
         person.setPhone(personInput.phone());
         person.setEmail(personInput.email());
-        person.setGender(personInput.gender());
         person.setName(personInput.name());
         person.setAge(personInput.age());
 
@@ -29,7 +28,6 @@ public class PersonService {
 
         person.setName(personInput.name());
         person.setAge(personInput.age());
-        person.setGender(personInput.gender());
         person.setEmail(personInput.email());
         person.setPhone(personInput.phone());
 

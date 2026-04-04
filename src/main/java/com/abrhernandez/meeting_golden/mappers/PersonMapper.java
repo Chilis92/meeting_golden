@@ -10,7 +10,6 @@ public class PersonMapper {
         Person person = new Person();
         person.setName(personInput.name());
         person.setAge(personInput.age());
-        person.setGender(personInput.gender());
         person.setEmail(personInput.email());
         person.setPhone(personInput.phone());
         return person;

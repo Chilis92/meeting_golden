@@ -19,7 +19,6 @@ public class PersonService {
         person.setGender(personInput.gender());
         person.setName(personInput.name());
         person.setAge(personInput.age());
-        person.setCity(personInput.city());
 
         return personRepository.save(person);
     }
@@ -32,7 +31,6 @@ public class PersonService {
         person.setAge(personInput.age());
         person.setGender(personInput.gender());
         person.setEmail(personInput.email());
-        person.setCity(personInput.city());
         person.setPhone(personInput.phone());
 
         return personRepository.save(person);

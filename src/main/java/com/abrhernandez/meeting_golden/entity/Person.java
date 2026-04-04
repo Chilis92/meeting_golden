@@ -25,7 +25,6 @@ public class Person implements Serializable {
     @Column(nullable = false)
     private String name;
     private Integer age;
-    private String gender;
     private String email;
     private String phone;
     @OneToMany(mappedBy = "owner")

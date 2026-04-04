@@ -11,6 +11,8 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import com.abrhernandez.meeting_golden.entity.DogPageResponse;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -22,8 +24,8 @@ public class DogController {
     private final DogService dogService;
 
     @QueryMapping
-    public List<Dog> findAllDogs() {
-        return dogService.findAll();
+    public DogPageResponse findAllDogs(@Argument int page, @Argument int size) {
+        return dogService.findAll(page, size);
     }
 
     @QueryMapping

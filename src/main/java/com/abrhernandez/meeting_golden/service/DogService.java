@@ -13,6 +13,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import com.abrhernandez.meeting_golden.entity.DogPageResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +32,16 @@ public class DogService {
     private final DogMapper dogMapper;
     private final GcsService gcsService;
 
-    public List<Dog> findAll() {
-        return dogRepository.findAllWithOwner();
+    public DogPageResponse findAll(int page, int size) {
+        PageRequest pageable = PageRequest.of(page, size, Sort.by("dogId").descending());
+        Page<Dog> dogPage = dogRepository.findAll(pageable);
+        return new DogPageResponse(
+                dogPage.getContent(),
+                dogPage.getTotalElements(),
+                dogPage.getTotalPages(),
+                dogPage.getNumber(),
+                dogPage.hasNext()
+        );
     }
 
     public Dog findDogById(Integer id) {

@@ -34,8 +34,16 @@ input PersonInput{
     phone: String
 }
 
+type DogPage{
+    content: [Dog]!
+    totalElements: Int
+    totalPages: Int
+    currentPage: Int
+    hasNext: Boolean
+}
+
 type Query{
-    findAllDogs: [Dog]!
+    findAllDogs(page: Int, size: Int): DogPage!
     findDogByID(id: ID): Dog!
 }
 

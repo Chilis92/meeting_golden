@@ -13,7 +13,7 @@ import java.io.IOException;
 @Configuration
 public class GcsConfig {
 
-    @Value("${gcs.credentials.path}")
+    @Value("${gcs.credentials.path:}")
     private String credentialsPath;
 
     @Value("${gcs.project.id}")
@@ -21,12 +21,12 @@ public class GcsConfig {
 
     @Bean
     public Storage googleCloudStorage() throws IOException {
-        GoogleCredentials credentials = GoogleCredentials
-                .fromStream(new FileInputStream(credentialsPath));
-        return StorageOptions.newBuilder()
-                .setProjectId(projectId)
-                .setCredentials(credentials)
-                .build()
-                .getService();
+        StorageOptions.Builder builder = StorageOptions.newBuilder().setProjectId(projectId);
+        if (credentialsPath != null && !credentialsPath.isBlank()) {
+            builder.setCredentials(GoogleCredentials.fromStream(new FileInputStream(credentialsPath)));
+        } else {
+            builder.setCredentials(GoogleCredentials.getApplicationDefault());
+        }
+        return builder.build().getService();
     }
 }

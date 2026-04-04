@@ -13,7 +13,6 @@ public class PersonMapper {
         person.setGender(personInput.gender());
         person.setEmail(personInput.email());
         person.setPhone(personInput.phone());
-        person.setCity(personInput.city());
         return person;
     }
 

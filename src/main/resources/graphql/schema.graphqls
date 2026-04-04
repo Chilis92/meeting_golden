@@ -4,6 +4,8 @@ type Dog{
     age: Int
     gender: String
     imageURL: String
+    instagram: String
+    city: String
     owner: Person
 }
 
@@ -11,6 +13,8 @@ input DogInput{
     name: String
     age: Int
     gender: String
+    instagram: String
+    city: String
     file: Upload
 }
 
@@ -20,7 +24,6 @@ type Person{
     age: Int
     gender: String
     email: String
-    city: String
     phone: String
 }
 
@@ -29,7 +32,6 @@ input PersonInput{
     age: Int
     gender: String
     email: String
-    city: String
     phone: String
 }
 

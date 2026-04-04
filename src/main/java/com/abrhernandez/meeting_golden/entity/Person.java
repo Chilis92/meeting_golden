@@ -29,7 +29,6 @@ public class Person implements Serializable {
     private String gender;
     @Column(nullable = false)
     private String email;
-    private String city;
     private String phone;
     @OneToMany(mappedBy = "owner")
     private Set<Dog> dogs;

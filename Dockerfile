@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:22-jdk-jammy
 LABEL authors="abrhernandez"
 
 WORKDIR /app

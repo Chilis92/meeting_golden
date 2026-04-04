@@ -35,6 +35,8 @@ public class Dog implements Serializable {
     @Column(nullable = false)
     private String gender;
     private String imageURL;
+    private String instagram;
+    private String city;
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person owner;

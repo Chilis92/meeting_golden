@@ -29,6 +29,8 @@ public class DogMapper {
             dog.setAge(doggie.age());
             dog.setGender(doggie.gender());
             dog.setName(doggie.name());
+            dog.setInstagram(doggie.instagram());
+            dog.setCity(doggie.city());
             dog.setOwner(person);
             result.add(dog);
 

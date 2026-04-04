@@ -40,9 +40,10 @@ public class DogService {
         Person personSaved = null;
         if (personInput != null) {
             Person person = PersonMapper.mapPersonFromPersonInput(personInput);
-            personSaved = personRepository.save(person);
-            log.info("Person saved, ID : " + personSaved.getPersonId());
-            kafkaMessagePublisher.ifPresent(k -> k.sendPersonMessage(personSaved));
+            final Person savedPerson = personRepository.save(person);
+            personSaved = savedPerson;
+            log.info("Person saved, ID : " + savedPerson.getPersonId());
+            kafkaMessagePublisher.ifPresent(k -> k.sendPersonMessage(savedPerson));
         }
 
         List<Dog> dogsToBeSaved = dogMapper.mapDogListFromDogInput(dogInput, personSaved);
@@ -59,6 +60,8 @@ public class DogService {
         dog.setName(dogInput.name());
         dog.setAge(dogInput.age());
         dog.setGender(dogInput.gender());
+        dog.setInstagram(dogInput.instagram());
+        dog.setCity(dogInput.city());
 
         if (dogInput.file() != null) {
             String imageURL = gcsService.uploadFile(dogInput.file());

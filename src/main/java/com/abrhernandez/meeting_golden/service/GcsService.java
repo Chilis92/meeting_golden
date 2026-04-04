@@ -22,6 +22,18 @@ public class GcsService {
     @Value("${gcs.bucket.name}")
     private String bucketName;
 
+    public void deleteFile(String imageURL) {
+        if (imageURL == null || imageURL.isBlank()) return;
+        try {
+            String prefix = String.format("https://storage.googleapis.com/%s/", bucketName);
+            String fileName = imageURL.replace(prefix, "");
+            storage.delete(BlobId.of(bucketName, fileName));
+            log.info("File deleted from GCS: {}", fileName);
+        } catch (Exception e) {
+            log.error("Failed to delete file from GCS: {}", e.getMessage());
+        }
+    }
+
     public String uploadFile(MultipartFile file) {
         try {
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();

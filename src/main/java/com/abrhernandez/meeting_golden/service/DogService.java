@@ -74,6 +74,7 @@ public class DogService {
     public boolean deleteDog(Integer id) {
         Dog dog = dogRepository.findById(id)
                 .orElseThrow(() -> new CustomGraphQLException(404, "Dog not found with id: " + id));
+        gcsService.deleteFile(dog.getImageURL());
         dogRepository.delete(dog);
         return true;
     }

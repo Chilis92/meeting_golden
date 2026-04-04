@@ -28,7 +28,7 @@ public class DogService {
     private final GcsService gcsService;
 
     public List<Dog> findAll() {
-        return dogRepository.findAll();
+        return dogRepository.findAllWithOwner();
     }
 
     public Dog findDogById(Integer id) {

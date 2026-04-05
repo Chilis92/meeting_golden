@@ -79,6 +79,7 @@ public class DogService {
         dog.setGender(dogInput.gender());
         dog.setInstagram(dogInput.instagram());
         dog.setCity(dogInput.city());
+        dog.setApodo(dogInput.apodo());
 
         if (dogInput.file() != null) {
             String imageURL = gcsService.uploadFile(dogInput.file());

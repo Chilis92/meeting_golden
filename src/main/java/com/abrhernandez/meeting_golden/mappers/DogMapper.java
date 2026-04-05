@@ -32,6 +32,7 @@ public class DogMapper {
             dog.setName(doggie.name());
             dog.setInstagram(doggie.instagram());
             dog.setCity(doggie.city());
+            dog.setApodo(doggie.apodo());
             dog.setOwner(person);
             dog.setToken(UUID.randomUUID().toString());
             result.add(dog);

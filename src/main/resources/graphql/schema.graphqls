@@ -6,6 +6,7 @@ type Dog{
     imageURL: String
     instagram: String
     city: String
+    apodo: String
     token: String
     owner: Person
 }
@@ -16,6 +17,7 @@ input DogInput{
     gender: String
     instagram: String
     city: String
+    apodo: String
     file: Upload
 }
 

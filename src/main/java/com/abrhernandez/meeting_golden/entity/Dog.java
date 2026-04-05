@@ -38,6 +38,7 @@ public class Dog implements Serializable {
     private String instagram;
     private String city;
     private String token;
+    private String apodo;
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person owner;
